@@ -1,105 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Detail Blog - How to Deploy a Web Application</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panduan lengkap deploy aplikasi web menggunakan Docker dan NGINX di server sendiri.">
+<title>Blog Detail - How to Deploy a Web Application Using Docker and NGINX</title>
 </head>
-
 <body>
-    <nav>
-        <b>Navigasi:</b>
-        <a href='/blog'>Blog List</a> |
-        <a href='/blog-detail'>Blog Detail</a> |
-        <a href='/cv'>CV</a> |
-        <a href='/form'>Form</a> |
-        <a href='/'>Film</a>
-    </nav>
-    <main>
-        <img src="https://dummyimage.com/1200x400/5e9eab/ffffff.png&text=Docker+and+NGINX" width="100%"
-            alt="Cover Image" />
 
-        <br /><br />
+<nav>
+<a href="index.html">IMDb Top 3 Movies</a> |
+<a href="blog.html">Dev Blogs</a> |
+<a href="form.html">Form Daftar Akun</a> |
+<a href="cv.html">Curriculum Vitae</a>
+</nav>
 
-        <table>
-            <tr>
-                <td valign="top">
-                    <img src="https://dummyimage.com/32x32/cccccc/000000.png&text=32x32" width="32" height="32"
-                        alt="Profile Vishnu" />
-                </td>
-                <td>
-                    <span><b>Vishnu Satheesh</b></span><br />
-                    <span>Posted on May 31</span>
-                </td>
-            </tr>
-        </table>
+<main>
 
-        <h1>How to Deploy a Web Application Using Docker and NGINX on Your Own Server</h1>
+<hr>
 
-        <p>
-            <span>#webdev</span> &nbsp; <span>#devops</span>
-        </p>
+<img src="https://picsum.photos/id/180/1200/400" width="100%" alt="Blog Cover">
 
-        <hr />
+<p>
+  <img src="https://picsum.photos/id/177/32/32" width="32" height="32" alt="Vishnu Satheesh">
+  <span><strong>Vishnu Satheesh</strong></span>&nbsp;&nbsp;
+  <span>May 31</span>
+</p>
 
-        <p>
-            Deploying a web application doesn't need to be a complicated process. With Docker, NGINX, and your own
-            server, you can get your app live in no time.<br />
-            In this blog, I'll show you step by step how to serve your app with a domain, route traffic with NGINX, and
-            run it all inside a Docker container. This guide is specifically tailored for a Linux-based server
-        </p>
+<h1>How to Deploy a Web Application Using Docker and NGINX on Your Own Server</h1>
 
-        <p>
-            <b>Step 1 : Setup docker</b><br />
-            First, let's set up Docker. I'm using a simple React app as an example, but feel free to use any application
-            or codebase of your choice. Create a Dockerfile in your project directory to define how your app should be
-            containerized.
-        </p>
+<hr>
 
-        <p>
-            Dockerfile:
-        </p>
+<p>
+Menjalankan aplikasi web di server sendiri sering terasa merepotkan karena perbedaan environment antara laptop pengembang dan server produksi. Docker menyelesaikan masalah ini dengan cara mengemas aplikasi beserta seluruh dependensinya ke dalam sebuah container yang dapat dijalankan secara konsisten di mana saja, sementara NGINX berperan sebagai reverse proxy yang menangani lalu lintas HTTP menuju aplikasi tersebut.
+</p>
 
-        <pre>
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-CMD [ "npm", "start" ]
-        </pre>
+<p>
+<strong>Step 1: Setup Docker</strong><br>
+Langkah pertama adalah menginstal Docker pada server, lalu memastikan layanan Docker berjalan dengan baik. Selanjutnya, buat sebuah Dockerfile pada root proyek yang mendefinisikan base image, dependensi, dan perintah untuk menjalankan aplikasi. Dockerfile ini menjadi cetak biru bagaimana image aplikasi akan dibangun.
+</p>
 
-        <p>
-            <b>Step 2 : Build and Run the Docker Container (on your server)</b><br />
-            Once you've created your Dockerfile, the next step is to build your Docker image and run it to make sure
-            everything is working as expected.
-        </p>
+<p>
+<strong>Step 2: Build and Run the Docker Container</strong><br>
+Setelah Dockerfile siap, gunakan perintah build untuk membuat image dari Dockerfile tersebut, kemudian jalankan container dari image itu dengan mapping port yang sesuai. Setelah container berjalan, konfigurasikan NGINX sebagai reverse proxy yang meneruskan permintaan dari port 80 ke port aplikasi di dalam container, sehingga aplikasi dapat diakses melalui domain atau IP server tanpa perlu menyebutkan port secara eksplisit.
+</p>
 
-        <p>
-            <b>Conclusion</b><br />
-            Deploying your web application using Docker and NGINX on your own server might sound intimidating at first,
-            but once you break it down, it's quite manageable.<br />
-            By containerizing your app, setting up NGINX as a reverse proxy, and linking everything together on your
-            VPS, you gain full control over your deployment process.
-        </p>
+<p>
+<strong>Conclusion</strong><br>
+Dengan menggabungkan Docker dan NGINX, proses deployment menjadi lebih rapi, mudah direplikasi, dan lebih aman karena aplikasi berjalan terisolasi di dalam container. Pendekatan ini sangat cocok digunakan baik untuk proyek kecil maupun aplikasi produksi yang membutuhkan skalabilitas di kemudian hari.
+</p>
 
-        <hr />
+<hr>
 
-        <p><b>Top comments (0)</b></p>
-        <table>
-            <tr>
-                <td valign="top">
-                    <img src="https://dummyimage.com/32x32/cccccc/000000.png&text=32x32" width="32" height="32"
-                        alt="Profile Commenter" />
-                </td>
-                <td>
-                    <textarea rows="3" cols="40" placeholder="Add to the discussion"
-                        aria-label="Add to the discussion"></textarea>
-                </td>
-            </tr>
-        </table>
+<p>
+  <img src="https://picsum.photos/id/64/32/32" width="32" height="32" alt="Your profile">
+</p>
+<textarea rows="3" placeholder="Add to the discussion"></textarea>
 
-    </main>
+</main>
+
 </body>
-
 </html>
